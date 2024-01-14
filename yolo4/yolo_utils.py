@@ -346,33 +346,3 @@ def draw_boxes(filename, v_boxes, v_labels, v_scores, v_colors):
         pyplot.text(x1, y1, label, color='white')
     # show the plot
     pyplot.show()
-
-import os    
-
-# draw all results and save the image to a folder
-def draw_boxes_and_save(filename, v_boxes, v_labels, v_scores, v_colors, output_folder):
-    # load the image
-    data = pyplot.imread(filename)
-    # plot the image
-    pyplot.imshow(data)
-    # get the context for drawing boxes
-    ax = pyplot.gca()
-    # plot each box
-    for i in range(len(v_boxes)):
-        box = v_boxes[i]
-        # get coordinates
-        y1, x1, y2, x2 = box.ymin, box.xmin, box.ymax, box.xmax
-        # calculate width and height of the box
-        width, height = x2 - x1, y2 - y1
-        # create the shape
-        rect = Rectangle((x1, y1), width, height, fill=False, color=v_colors[i])
-        # draw the box
-        ax.add_patch(rect)
-        # draw text and score in top left corner
-        label = "%s (%.3f)" % (v_labels[i], v_scores[i])
-        pyplot.text(x1, y1, label, color='white')
-    # save the plot to a file in the specified output folder
-    output_filepath = os.path.join(output_folder, os.path.basename(filename))
-    pyplot.savefig(output_filepath)
-    # close the plot
-    pyplot.close()
