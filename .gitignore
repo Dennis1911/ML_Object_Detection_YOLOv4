@@ -84,7 +84,9 @@ ipython_config.py
 
 
 ...
-model/
+model/yolov4.h5
+model/yolov4.weights
+!model/coco_classes.txt
 
 
 # pyenv
